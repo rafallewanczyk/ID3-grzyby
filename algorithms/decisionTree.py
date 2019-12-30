@@ -1,4 +1,5 @@
 import networkx as net
+from networkx.drawing.nx_agraph import write_dot, graphviz_layout
 from math import log2
 import matplotlib.pyplot as plt
 from pandas import DataFrame
@@ -64,8 +65,8 @@ class DecisionTree:
 
     def draw_tree(self):
         # self.graph.add_edge("Ammo", "Defend")
-        print(self.graph.nodes)
-
+        # print(self.graph.nodes)
+        # write_dot(self.graph, 'test.dot')
         pos = net.spring_layout(self.graph)
         net.draw_networkx(self.graph, pos = pos)
         labels = net.get_edge_attributes(self.graph, 'user_data')

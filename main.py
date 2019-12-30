@@ -42,16 +42,25 @@ y = np.array(["(30k,38k)",
               "(23k,30k)",
               "(23k,30k)"])
 
-Z = np.array([["Healthy", "In Cover", "With Ammo"],
-               ["Hurt", "In Cover", "With Ammo"],
-              ["Healthy", "In Cover", "Empty"],
-              ["Hurt", "In Cover", "Empty"],
-              ["Hurt", "Exposed", "With Ammo"]])
-t = np.array(["Attack", "Attack", "Defend", "Defend", "Defend"])
-# data = DataFrame(Z,columns=["State", "Cover", "Ammo"])
-# data['class'] = t
-data = DataFrame(X, columns = ["age", "gender", "sector", "degree"])
-data["class"] = y
+Z = np.array([["rainy", "hot", "high", "false"],
+               ["rainy", "hot", "high", "true"],
+              ["overcast", "hot", "high", "false"],
+              ["sunny", "mild", "high", "false"],
+              ["sunny", "cool", "normal", "false"],
+              ["sunny", "cool", "normal", "ture"],
+              ["overcast", "cool", "normal", "ture"],
+              ["rainy", "mild", "high", "false"],
+              ["rainy", "cool", "normal", "false"],
+              ["sunny", "mild", "normal", "false"],
+              ["rainy", "mild", "normal", "true"],
+              ["overcast", "mild", "high", "true"],
+              ["overcast", "hot", "normal", "false"],
+              ["sunny", "mild", "high", "true"]])
+t = np.array(["no", "no", "yes", "yes", "yes", "no", "yes", "no", "yes", "yes", "yes", "yes", "yes", "no"])
+data = DataFrame(Z,columns=["Outlook", "Temp", "Humidity", "Windy"])
+data['class'] = t
+# data = DataFrame(X, columns = ["age", "gender", "sector", "degree"])
+# data["class"] = y
 
 tree = DecisionTree(data)
 tree.build_tree(data)
@@ -82,11 +91,11 @@ tree.draw_tree()
 
 
 
-
-
-
-
-# file = open("data/agaricus-lepiota-small.data", "r")
+#
+#
+#
+#
+# file = open("data/agaricus-lepiota.data", "r")
 # data_class, data = [], []
 # for x in file:
 #     data_class.append(x[0])
@@ -104,9 +113,7 @@ tree.draw_tree()
 # tree = DecisionTree(frame_data)
 # tree.build_tree(frame_data)
 # tree.draw_tree()
-# tree = DecisionTree(frame_data)
-# tree.buildTree()
-
+#
 # tree = tree.MyDecisionTreeClassifier()
 # tree.fit(frame_data,frame_data_class)
 # tree.print_tree()
