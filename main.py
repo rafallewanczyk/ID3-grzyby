@@ -48,13 +48,14 @@ Z = np.array([["Healthy", "In Cover", "With Ammo"],
               ["Hurt", "In Cover", "Empty"],
               ["Hurt", "Exposed", "With Ammo"]])
 t = np.array(["Attack", "Attack", "Defend", "Defend", "Defend"])
-data = DataFrame(Z,columns=["State", "Cover", "Ammmo"])
-data['class'] = t
-# data = DataFrame(X, columns = ["age", "gender", "sector", "degree"])
-# data["class"] = y
+# data = DataFrame(Z,columns=["State", "Cover", "Ammo"])
+# data['class'] = t
+data = DataFrame(X, columns = ["age", "gender", "sector", "degree"])
+data["class"] = y
 
 tree = DecisionTree(data)
-tree.buildTree(data)
+tree.build_tree(data)
+tree.draw_tree()
 
 
 
@@ -99,7 +100,10 @@ tree.buildTree(data)
 #                                    'stalk-color-below-ring', 'veil-type', 'veil-color', 'ring-number', 'ring-type',
 #                                    'spore-print-color', 'population', 'habitat'])
 # frame_data_class = DataFrame([np.array(xi) for xi in data_class])
-
+# frame_data['class'] = frame_data_class
+# tree = DecisionTree(frame_data)
+# tree.build_tree(frame_data)
+# tree.draw_tree()
 # tree = DecisionTree(frame_data)
 # tree.buildTree()
 
