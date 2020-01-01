@@ -47,7 +47,7 @@ Z = np.array([["rainy", "hot", "high", "false"],
               ["overcast", "hot", "high", "false"],
               ["sunny", "mild", "high", "false"],
               ["sunny", "cool", "normal", "false"],
-              ["sunny", "cool", "normal", "ture"],
+              ["sunny", "cool", "normal", "true"],
               ["overcast", "cool", "normal", "ture"],
               ["rainy", "mild", "high", "false"],
               ["rainy", "cool", "normal", "false"],
@@ -65,6 +65,9 @@ data['class'] = t
 tree = DecisionTree(data)
 tree.build_tree(data)
 tree.draw_tree()
+
+query = DataFrame([["sunny", "hot", "high", "true"]], columns=["Outlook", "Temp", "Humidity", "Windy"])
+print(tree.predict(query))
 
 
 

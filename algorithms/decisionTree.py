@@ -9,6 +9,7 @@ class DecisionTree:
     graph = net.DiGraph()
     counter = 0
 
+
     def __init__(self, train_data):
         self.data = train_data
 
@@ -20,8 +21,8 @@ class DecisionTree:
         if len(classes) == 1 :
 
             print(f"lisc polaczenie {parent} -- {attribute_state} --> {classes[0]}")
-            self.graph.add_node(classes[0]+'.'+ str(self.counter))
-            if parent: self.graph.add_edge(parent, classes[0]+'.'+str(self.counter), user_data= attribute_state)
+            self.graph.add_node((classes[0],self.counter))
+            if parent: self.graph.add_edge(parent, (classes[0],self.counter), user_data= attribute_state)
             self.counter+= 1
             return
 
@@ -32,6 +33,7 @@ class DecisionTree:
         if parent:
             self.graph.add_edge(parent, attribute, user_data = attribute_state)
             print(f"polaczenie {parent} -- {attribute_state} --> {attribute}")
+        else : self.root = attribute
 
         for state in data_interval[attribute[0]].unique():
            self.build_tree(data_interval.loc[data_interval[attribute[0]] == state], attribute, state)
@@ -63,8 +65,16 @@ class DecisionTree:
         print(f"najlepszy parametr {best_parameter} \n")
         return best_parameter
 
+    def predict(self, data_interval, attribute = None):
+        if attribute == None : attribute = self.root
+        if len(list(self.graph.neighbors(attribute))) == 0 :
+            return attribute[0]
+
+        for node in list(self.graph.neighbors(attribute)):
+            if self.graph.get_edge_data(attribute, node)['user_data'] == data_interval[attribute[0]][0]:
+                return self.predict(data_interval, node)
+
     def draw_tree(self):
-        # self.graph.add_edge("Ammo", "Defend")
         # print(self.graph.nodes)
         # write_dot(self.graph, 'test.dot')
         pos = net.spring_layout(self.graph)
