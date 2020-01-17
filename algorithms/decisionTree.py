@@ -8,6 +8,7 @@ from pandas import DataFrame
 class DecisionTree():
     graph = net.DiGraph()
     counter = 0
+    labels = {}
 
     def __init__(self, train_data):
         self.data = train_data
@@ -38,11 +39,13 @@ class DecisionTree():
                 s += (f"{state}:{counter/len(data_interval['class'])}|")
             print(f"lisc polaczenien rozne {parent} -- {attribute_state} --> {s}")
             self.graph.add_node((s, self.counter))
+            self.labels[(s, self.counter)] = s
             if parent: self.graph.add_edge(parent, (s, self.counter), user_data=attribute_state)
             self.counter += 1
             return
 
         self.graph.add_node(attribute)
+        self.labels[attribute] = attribute[0]
         if parent:
             self.graph.add_edge(parent, attribute, user_data=attribute_state)
             print(f"polaczenie {parent} -- {attribute_state} --> {attribute}")
@@ -96,13 +99,14 @@ class DecisionTree():
                 return self.predict(data_interval, node)
 
     def draw_tree(self):
+        print(self.labels)
         # print(self.graph.nodes)
         write_dot(self.graph, 'test.dot')
 
         pos = graphviz_layout(self.graph, prog='dot')
 
         # pos = net.spring_layout(self.graph)
-        net.draw_networkx(self.graph, pos=pos)
+        net.draw_networkx(self.graph, pos=pos, with_labels=True, labels = self.labels)
         labels = net.get_edge_attributes(self.graph, 'user_data')
         net.draw_networkx_edge_labels(self.graph, pos=pos, edge_labels=labels)
         plt.show()
