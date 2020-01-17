@@ -5,7 +5,31 @@ import numpy as np
 import networkx as net
 import matplotlib.pyplot as plt
 from algorithms.rouletteDecisionTree import RouletteDecisionTree
+import argparse
+from data.reader import read_data
 
+
+def main():
+    parser = argparse.ArgumentParser(description="ID3 algorithm")
+    #parser.add_argument('-n', type=str, help="Column names file to import")
+    parser.add_argument('-d', type=str, help="Data file to import")
+    parser.add_argument('-r', action='store_true')
+
+    args = parser.parse_args()
+
+    if args.d is None:
+        print('Missing input file name')
+
+    frame_data = read_data(args.d)
+    tree = RouletteDecisionTree(frame_data) if args.r else DecisionTree(frame_data)
+
+    tree.build_tree(frame_data)
+    tree.draw()
+
+     
+
+if __name__ == '__main__':
+    main()
 #
 # X = np.array([[45, "male", "private", "m"],
 #               [50, "female", "private", "m"],
