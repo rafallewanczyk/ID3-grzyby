@@ -28,7 +28,7 @@ class DecisionTree():
         attribute = (self.best_attribute(data_interval, self.total_entropy(data_interval)), self.counter)
         self.counter += 1
 
-        if attribute[0] == "none":
+        if attribute[0] == "":
             s = ""
             for state in classes:
                 counter = 0

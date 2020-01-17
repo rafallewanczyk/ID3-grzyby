@@ -6,6 +6,7 @@ class RouletteDecisionTree(DecisionTree):
     def best_attribute(self, data_interval, entropy):
         information_gains = self.information_gains(data_interval, entropy)
         gains_sum = sum(information_gains.values())
+        if gains_sum == 0: return ''
         gains_probabilities = []
 
         for parameter in information_gains.keys():
