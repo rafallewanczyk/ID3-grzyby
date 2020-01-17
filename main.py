@@ -124,22 +124,22 @@ if __name__ == '__main__':
 
 
 
-file = open("data/agaricus-lepiota.data", "r")
-data_class, data = [], []
-for x in file:
-    data_class.append(x[0])
-    data.append(x[2:-1])
-file.close()
+# file = open("data/agaricus-lepiota.data", "r")
+# data_class, data = [], []
+# for x in file:
+#     data_class.append(x[0])
+#     data.append(x[2:-1])
+# file.close()
 
-y = np.array([np.array(xi.split(',')) for xi in data])
-frame_data = DataFrame(y, columns=['cap-shape', 'cap-surface', 'cap-color', 'bruises', 'odor', 'gill-attachment',
-                                   'gill-spacing', 'gill-size', 'gill-color', 'stalk-shape', 'stalk-root',
-                                   'stalk-surface-above-ring', 'stalk-surface-below-ring', 'stalk-color-above-ring',
-                                   'stalk-color-below-ring', 'veil-type', 'veil-color', 'ring-number', 'ring-type',
-                                   'spore-print-color', 'population', 'habitat'])
-frame_data_class = DataFrame([np.array(xi) for xi in data_class])
-frame_data['class'] = frame_data_class
-tree = DecisionTree(frame_data)
-tree.build_tree(frame_data)
-tree.draw_tree()
+# y = np.array([np.array(xi.split(',')) for xi in data])
+# frame_data = DataFrame(y, columns=['cap-shape', 'cap-surface', 'cap-color', 'bruises', 'odor', 'gill-attachment',
+#                                    'gill-spacing', 'gill-size', 'gill-color', 'stalk-shape', 'stalk-root',
+#                                    'stalk-surface-above-ring', 'stalk-surface-below-ring', 'stalk-color-above-ring',
+#                                    'stalk-color-below-ring', 'veil-type', 'veil-color', 'ring-number', 'ring-type',
+#                                    'spore-print-color', 'population', 'habitat'])
+# frame_data_class = DataFrame([np.array(xi) for xi in data_class])
+# frame_data['class'] = frame_data_class
+# tree = DecisionTree(frame_data)
+# tree.build_tree(frame_data)
+# tree.draw_tree()
 
