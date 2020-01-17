@@ -43,6 +43,7 @@ y = np.array(["(30k,38k)",
               "(23k,30k)"])
 
 Z = np.array([["rainy", "hot", "high", "false"],
+              ["rainy", "hot", "high", "false"],
                ["rainy", "hot", "high", "true"],
               ["overcast", "hot", "high", "false"],
               ["sunny", "mild", "high", "false"],
@@ -56,7 +57,7 @@ Z = np.array([["rainy", "hot", "high", "false"],
               ["overcast", "mild", "high", "true"],
               ["overcast", "hot", "normal", "false"],
               ["sunny", "mild", "high", "true"]])
-t = np.array(["no", "no", "yes", "yes", "yes", "no", "yes", "no", "yes", "yes", "yes", "yes", "yes", "no"])
+t = np.array(["no", "yes", "no", "yes", "yes", "yes", "no", "yes", "no", "yes", "yes", "yes", "yes", "yes", "no"])
 data = DataFrame(Z,columns=["Outlook", "Temp", "Humidity", "Windy"])
 data['class'] = t
 # data = DataFrame(X, columns = ["age", "gender", "sector", "degree"])
