@@ -1,11 +1,11 @@
 import networkx as net
 from networkx.drawing.nx_agraph import write_dot, graphviz_layout
-from math import log2
+from math import log
 import matplotlib.pyplot as plt
 from pandas import DataFrame
 
 
-class DecisionTree:
+class DecisionTree():
     graph = net.DiGraph()
     counter = 0
 
@@ -21,7 +21,7 @@ class DecisionTree:
         if len(classes) == 1 :
 
             print(f"lisc polaczenie {parent} -- {attribute_state} --> {classes[0]}")
-            self.graph.add_node((classes[0],self.counter))
+            self.graph.add_node((classes[0], self.counter))
             if parent: self.graph.add_edge(parent, (classes[0],self.counter), user_data= attribute_state)
             self.counter+= 1
             return
@@ -43,25 +43,35 @@ class DecisionTree:
 
     def total_entropy(self, data_interval):
         entropy = 0
+        number_of_choices = len(data_interval['class'].unique())
+        if number_of_choices == 1:
+            return 0
         for x in data_interval['class'].unique():
             ratio = data_interval.loc[data_interval['class'] == x].shape[0] / data_interval.shape[0]
-            entropy += -ratio * log2(ratio)
+            entropy += -ratio * log(ratio, number_of_choices)
         return entropy
 
-    def best_attribute(self, data_interval, entropy):
-        best_parameter, best_gain = "", 0
+    def information_gains(self, data_interval, entropy):
+        gains = {}
         for c in data_interval.columns:
             if c == 'class': break
             information = 0
             for state in data_interval[c].unique():
                 df = data_interval.loc[data_interval[c] == state]
-                # print(df)
-                # print(self.total_entropy(df))
                 information += df.shape[0] / data_interval.shape[0] * self.total_entropy(df)
+                gains[c] = entropy - information
             print(f"parameter : {c} information : {information} gain: {entropy - information}")
-            if entropy - information > best_gain:
-                best_gain = entropy - information
-                best_parameter = c
+
+        return gains
+
+    def best_attribute(self, data_interval, entropy):
+        print(f'entropia: {entropy}')
+        best_parameter, best_gain = '', 0
+        information_gains = self.information_gains(data_interval, entropy)
+        for parameter in information_gains.keys():
+            if information_gains[parameter] > best_gain:
+                best_gain = information_gains[parameter]
+                best_parameter = parameter
         print(f"najlepszy parametr {best_parameter} \n")
         return best_parameter
 

@@ -4,6 +4,7 @@ from pandas import DataFrame
 import numpy as np
 import networkx as net
 import matplotlib.pyplot as plt
+from algorithms.rouletteDecisionTree import RouletteDecisionTree
 
 
 X = np.array([[45, "male", "private", "m"],
@@ -62,7 +63,7 @@ data['class'] = t
 # data = DataFrame(X, columns = ["age", "gender", "sector", "degree"])
 # data["class"] = y
 
-tree = DecisionTree(data)
+tree = RouletteDecisionTree(data)
 tree.build_tree(data)
 tree.draw_tree()
 
