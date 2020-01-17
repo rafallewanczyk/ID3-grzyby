@@ -17,22 +17,22 @@ class DecisionTree:
         print(data_interval)
         # print(self.total_entropy(data_interval))
         classes = data_interval['class'].unique().tolist()
-        if len(classes) == 1:
-
-            print(f"lisc polaczenie {parent} -- {attribute_state} --> {classes[0]}")
-            self.graph.add_node((classes[0], self.counter))
-            if parent: self.graph.add_edge(parent, (classes[0], self.counter), user_data=attribute_state)
-            self.counter += 1
-            return
+        # if len(classes) == 1:
+        #
+        #     print(f"lisc polaczenie {parent} -- {attribute_state} --> {classes[0]}")
+        #     self.graph.add_node((classes[0], self.counter))
+        #     if parent: self.graph.add_edge(parent, (classes[0], self.counter), user_data=attribute_state)
+        #     self.counter += 1
+        #     return
 
         attribute = (self.best_attribute(data_interval, self.total_entropy(data_interval)), self.counter)
         self.counter += 1
 
         if attribute[0] == "none":
             s = ""
-            for state in data_interval['class']:
+            for state in classes:
                 counter = 0
-                for x in classes:
+                for x in data_interval['class']:
                     if x == state:
                         counter += 1
                 s += (f"{state}:{counter/len(data_interval['class'])}|")
