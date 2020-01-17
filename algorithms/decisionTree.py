@@ -97,8 +97,11 @@ class DecisionTree():
 
     def draw_tree(self):
         # print(self.graph.nodes)
-        # write_dot(self.graph, 'test.dot')
-        pos = net.spring_layout(self.graph)
+        write_dot(self.graph, 'test.dot')
+
+        pos = graphviz_layout(self.graph, prog='dot')
+
+        # pos = net.spring_layout(self.graph)
         net.draw_networkx(self.graph, pos=pos)
         labels = net.get_edge_attributes(self.graph, 'user_data')
         net.draw_networkx_edge_labels(self.graph, pos=pos, edge_labels=labels)
