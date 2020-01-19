@@ -21,16 +21,17 @@ def main():
         print('Missing input file name')
 
     frame_data = read_data(args.d)
-    tree = RouletteDecisionTree(frame_data) if args.r else DecisionTree(frame_data)
+    print(frame_data)
+    tree = RouletteDecisionTree(frame_data) #if args.r else DecisionTree(frame_data)
 
     tree.build_tree(frame_data)
     tree.draw()
 
-     
+
 
 if __name__ == '__main__':
     main()
-#
+
 # X = np.array([[45, "male", "private", "m"],
 #               [50, "female", "private", "m"],
 #               [61, "other", "public", "b"],
@@ -90,7 +91,7 @@ if __name__ == '__main__':
 #
 # tree = RouletteDecisionTree(data)
 # tree.build_tree(data)
-# tree.draw_tree()
+# tree.draw()
 #
 # query = DataFrame([["sunny", "hot", "high", "true"]], columns=["Outlook", "Temp", "Humidity", "Windy"])
 # print(tree.predict(query))
@@ -124,13 +125,13 @@ if __name__ == '__main__':
 
 
 
-# file = open("data/agaricus-lepiota.data", "r")
+# file = open("data/agaricus-lepiota-small.data", "r")
 # data_class, data = [], []
 # for x in file:
 #     data_class.append(x[0])
 #     data.append(x[2:-1])
 # file.close()
-
+#
 # y = np.array([np.array(xi.split(',')) for xi in data])
 # frame_data = DataFrame(y, columns=['cap-shape', 'cap-surface', 'cap-color', 'bruises', 'odor', 'gill-attachment',
 #                                    'gill-spacing', 'gill-size', 'gill-color', 'stalk-shape', 'stalk-root',
@@ -139,7 +140,8 @@ if __name__ == '__main__':
 #                                    'spore-print-color', 'population', 'habitat'])
 # frame_data_class = DataFrame([np.array(xi) for xi in data_class])
 # frame_data['class'] = frame_data_class
+# print(frame_data)
 # tree = DecisionTree(frame_data)
 # tree.build_tree(frame_data)
-# tree.draw_tree()
+# tree.draw()
 

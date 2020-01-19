@@ -36,7 +36,7 @@ class DecisionTree():
                 for x in data_interval['class']:
                     if x == state:
                         counter += 1
-                s += (f"{state}:{counter/len(data_interval['class'])}|")
+                s += (f"{state}:{counter / len(data_interval['class'])}|")
             print(f"lisc polaczenien rozne {parent} -- {attribute_state} --> {s}")
             self.graph.add_node((s, self.counter))
             self.labels[(s, self.counter)] = s
@@ -68,7 +68,7 @@ class DecisionTree():
     def information_gains(self, data_interval, entropy):
         gains = {}
         for c in data_interval.columns:
-            if c == 'class': break
+            if c == 'class': continue
             information = 0
             for state in data_interval[c].unique():
                 df = data_interval.loc[data_interval[c] == state]
@@ -98,15 +98,15 @@ class DecisionTree():
             if self.graph.get_edge_data(attribute, node)['user_data'] == data_interval[attribute[0]][0]:
                 return self.predict(data_interval, node)
 
-    def draw_tree(self):
+    def draw(self):
         print(self.labels)
         # print(self.graph.nodes)
-        write_dot(self.graph, 'test.dot')
+        # write_dot(self.graph, 'test.dot')
 
-        pos = graphviz_layout(self.graph, prog='dot')
+        # pos = graphviz_layout(self.graph, prog='dot')
 
-        # pos = net.spring_layout(self.graph)
-        net.draw_networkx(self.graph, pos=pos, with_labels=True, labels = self.labels)
+        pos = net.spring_layout(self.graph)
+        net.draw_networkx(self.graph, pos=pos, with_labels=True, labels=self.labels)
         labels = net.get_edge_attributes(self.graph, 'user_data')
         net.draw_networkx_edge_labels(self.graph, pos=pos, edge_labels=labels)
         plt.show()
