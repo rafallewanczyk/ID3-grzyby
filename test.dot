@@ -1,30 +1,6 @@
 strict digraph "" {
-	"('odor', 0)" -> "('p:1.0|', 2)"	 [user_data=p];
-	"('odor', 0)" -> "('e:1.0|', 4)"	 [user_data=a];
-	"('odor', 0)" -> "('e:1.0|', 6)"	 [user_data=l];
-	"('odor', 0)" -> "('spore-print-color', 7)"	 [user_data=n];
-	"('odor', 0)" -> "('p:1.0|', 44)"	 [user_data=f];
-	"('odor', 0)" -> "('p:1.0|', 46)"	 [user_data=c];
-	"('odor', 0)" -> "('p:1.0|', 48)"	 [user_data=y];
-	"('odor', 0)" -> "('p:1.0|', 50)"	 [user_data=s];
-	"('odor', 0)" -> "('p:1.0|', 52)"	 [user_data=m];
-	"('spore-print-color', 7)" -> "('e:1.0|', 9)"	 [user_data=n];
-	"('spore-print-color', 7)" -> "('e:1.0|', 11)"	 [user_data=k];
-	"('spore-print-color', 7)" -> "('habitat', 12)"	 [user_data=w];
-	"('spore-print-color', 7)" -> "('e:1.0|', 34)"	 [user_data=h];
-	"('spore-print-color', 7)" -> "('p:1.0|', 36)"	 [user_data=r];
-	"('spore-print-color', 7)" -> "('e:1.0|', 38)"	 [user_data=o];
-	"('spore-print-color', 7)" -> "('e:1.0|', 40)"	 [user_data=y];
-	"('spore-print-color', 7)" -> "('e:1.0|', 42)"	 [user_data=b];
-	"('habitat', 12)" -> "('e:1.0|', 14)"	 [user_data=w];
-	"('habitat', 12)" -> "('cap-color', 15)"	 [user_data=l];
-	"('habitat', 12)" -> "('gill-size', 24)"	 [user_data=d];
-	"('habitat', 12)" -> "('e:1.0|', 30)"	 [user_data=g];
-	"('habitat', 12)" -> "('e:1.0|', 32)"	 [user_data=p];
-	"('cap-color', 15)" -> "('e:1.0|', 17)"	 [user_data=c];
-	"('cap-color', 15)" -> "('e:1.0|', 19)"	 [user_data=n];
-	"('cap-color', 15)" -> "('p:1.0|', 21)"	 [user_data=w];
-	"('cap-color', 15)" -> "('p:1.0|', 23)"	 [user_data=y];
-	"('gill-size', 24)" -> "('p:1.0|', 26)"	 [user_data=n];
-	"('gill-size', 24)" -> "('e:1.0|', 28)"	 [user_data=b];
+	"('odor', 0)" -> "('EDIBLE:1.0', 2)"	 [user_data=ALMOND];
+	"('odor', 0)" -> "('EDIBLE:1.0', 4)"	 [user_data=ANISE];
+	"('odor', 0)" -> "('EDIBLE:1.0', 6)"	 [user_data=NONE];
+	"('odor', 0)" -> "('POISONOUS:1.0', 8)"	 [user_data=PUNGENT];
 }

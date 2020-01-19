@@ -20,11 +20,11 @@ def main():
     if args.d is None:
         print('Missing input file name')
 
-    frame_data = read_data(args.d)
-    print(frame_data)
-    tree = RouletteDecisionTree(frame_data) #if args.r else DecisionTree(frame_data)
+    train_data, validation_data = read_data(args.d, 900)
+    tree = RouletteDecisionTree(train_data) if args.r else DecisionTree(train_data)
+    tree.build_tree(train_data)
+    tree.validate(validation_data)
 
-    tree.build_tree(frame_data)
     tree.draw()
 
 
@@ -86,13 +86,34 @@ if __name__ == '__main__':
 # t = np.array(["no", "yes", "no", "yes", "yes", "yes", "no", "yes", "no", "yes", "yes", "yes", "yes", "yes", "no"])
 # data = DataFrame(Z,columns=["Outlook", "Temp", "Humidity", "Windy"])
 # data['class'] = t
+#
+#
+# Z_validate = np.array([["rainy", "hot", "high", "false"],
+#               ["rainy", "hot", "high", "false"],
+#               ["rainy", "hot", "high", "true"],
+#               ["overcast", "hot", "high", "false"],
+#               ["sunny", "mild", "high", "false"],
+#               ["sunny", "cool", "normal", "false"],
+#               ["sunny", "cool", "normal", "true"],
+#               ["overcast", "cool", "normal", "true"],
+#               ["rainy", "mild", "high", "false"],
+#               ["rainy", "cool", "normal", "false"],
+#               ["sunny", "mild", "normal", "false"],
+#               ["rainy", "mild", "normal", "true"],
+#               ["overcast", "mild", "high", "true"],
+#               ["overcast", "hot", "normal", "false"],
+#               ["sunny", "mild", "high", "true"]])
+# t_validate = np.array(["no", "yes", "no", "yes", "yes", "yes", "no", "yes", "no", "yes", "yes", "yes", "yes", "yes", "no"])
+# data_val = DataFrame(Z_validate,columns=["Outlook", "Temp", "Humidity", "Windy"])
+# data_val['class'] = t_validate
 # # data = DataFrame(X, columns = ["age", "gender", "sector", "degree"])
 # # data["class"] = y
 #
-# tree = RouletteDecisionTree(data)
+# tree = DecisionTree(data)
 # tree.build_tree(data)
+# tree.validate(data_val)
 # tree.draw()
-#
+
 # query = DataFrame([["sunny", "hot", "high", "true"]], columns=["Outlook", "Temp", "Humidity", "Windy"])
 # print(tree.predict(query))
 

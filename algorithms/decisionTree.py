@@ -36,7 +36,7 @@ class DecisionTree():
                 for x in data_interval['class']:
                     if x == state:
                         counter += 1
-                s += (f"{state}:{counter / len(data_interval['class'])}|")
+                s += (f"{state}:{counter / len(data_interval['class'])}")
             print(f"lisc polaczenien rozne {parent} -- {attribute_state} --> {s}")
             self.graph.add_node((s, self.counter))
             self.labels[(s, self.counter)] = s
@@ -99,22 +99,27 @@ class DecisionTree():
                 return self.predict(data_interval, node)
 
     def draw(self):
-        print(self.labels)
-        # print(self.graph.nodes)
-        # write_dot(self.graph, 'test.dot')
+        #LINUX
+        write_dot(self.graph, 'test.dot')
+        pos = graphviz_layout(self.graph, prog='dot')
 
-        # pos = graphviz_layout(self.graph, prog='dot')
+        #WINDOWS
+        # pos = net.spring_layout(self.graph)
 
-        pos = net.spring_layout(self.graph)
         net.draw_networkx(self.graph, pos=pos, with_labels=True, labels=self.labels)
         labels = net.get_edge_attributes(self.graph, 'user_data')
         net.draw_networkx_edge_labels(self.graph, pos=pos, edge_labels=labels)
         plt.show()
 
-        # df = data_interval.loc[data_interval['State'] == 'Healthy']
-        # print(df)
-        # print(self.total_entropy(df))
-        #
-        # df = data_interval.loc[data_interval['State'] == 'Hurt']
-        # print(df)
-        # print(self.total_entropy(df))
+    def validate(self, validation_data):
+        record_list = validation_data.values.tolist()
+        columns = validation_data.columns.tolist()
+        print("walidacja")
+        error_ratio = 0
+        for row in record_list:
+            answer = self.predict(DataFrame([row[1::]], columns = columns[1::]))
+            try:
+                error_ratio += answer.split(":")[0] != row[0]
+            except AttributeError:
+                error_ratio += 1
+        print(f"error ratio: {error_ratio/len(record_list)}")
