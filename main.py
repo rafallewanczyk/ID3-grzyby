@@ -6,7 +6,8 @@ import networkx as net
 import matplotlib.pyplot as plt
 from algorithms.rouletteDecisionTree import RouletteDecisionTree
 import argparse
-from data.reader import read_data
+from data.reader import read_data, convert_to_frame
+from algorithms.cross_validation import cross_validation
 
 
 def main():
@@ -20,12 +21,11 @@ def main():
     if args.d is None:
         print('Missing input file name')
 
-    train_data, validation_data = read_data(args.d, 10)
-    tree = RouletteDecisionTree(train_data) if args.r else DecisionTree(train_data)
-    tree.build_tree(train_data)
-    tree.validate(validation_data)
+    data, names = read_data(args.d)
+    print(cross_validation(data, names, 3, False))
+    #tree.validate(validation_data)
 
-    tree.draw()
+    #tree.draw()
 
 
 

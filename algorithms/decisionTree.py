@@ -126,3 +126,6 @@ class DecisionTree():
             except AttributeError:
                 error_ratio += 1
         print(f"error ratio: {error_ratio/len(record_list)}")
+        return error_ratio / len(record_list)
+
+    
