@@ -1,0 +1,16 @@
+class,Outlook,Temp,Humidity,Windy
+no,rainy,hot,high,false
+yes,rainy,hot,high,false
+no,rainy,hot,high,true
+yes,overcast,hot,high,false
+yes,sunny,mild,high,false
+yes,sunny,cool,normal,false
+no,sunny,cool,normal,true
+yes,overcast,cool,normal,true
+no,rainy,mild,high,false
+yes,rainy,cool,normal,false
+yes,sunny,mild,normal,false
+yes,rainy,mild,normal,true
+yes,overcast,mild,high,true
+yes,overcast,hot,normal,false
+no,sunny,mild,high,true

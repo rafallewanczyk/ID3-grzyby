@@ -6,12 +6,13 @@ from pandas import DataFrame
 
 
 class DecisionTree():
-    graph = net.DiGraph()
-    counter = 0
-    labels = {}
+
 
     def __init__(self, train_data):
         self.data = train_data
+        self.graph = net.DiGraph()
+        self.counter = 0
+        self.labels = {}
 
     def build_tree(self, data_interval, parent=None, attribute_state=None):
         print(f"{parent}, {attribute_state}")
@@ -120,6 +121,8 @@ class DecisionTree():
             answer = self.predict(DataFrame([row[1::]], columns = columns[1::]))
             try:
                 error_ratio += answer.split(":")[0] != row[0]
+                if answer.split(":")[0] != row[0] :
+                    print(row)
             except AttributeError:
                 error_ratio += 1
         print(f"error ratio: {error_ratio/len(record_list)}")

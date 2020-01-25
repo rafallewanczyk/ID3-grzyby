@@ -20,7 +20,7 @@ def main():
     if args.d is None:
         print('Missing input file name')
 
-    train_data, validation_data = read_data(args.d, 900)
+    train_data, validation_data = read_data(args.d, 10)
     tree = RouletteDecisionTree(train_data) if args.r else DecisionTree(train_data)
     tree.build_tree(train_data)
     tree.validate(validation_data)

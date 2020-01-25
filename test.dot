@@ -1,6 +1,15 @@
 strict digraph "" {
-	"('odor', 0)" -> "('EDIBLE:1.0', 2)"	 [user_data=ALMOND];
-	"('odor', 0)" -> "('EDIBLE:1.0', 4)"	 [user_data=ANISE];
-	"('odor', 0)" -> "('EDIBLE:1.0', 6)"	 [user_data=NONE];
-	"('odor', 0)" -> "('POISONOUS:1.0', 8)"	 [user_data=PUNGENT];
+	"('Windy', 0)" -> "('Temp', 1)"	 [user_data=false];
+	"('Windy', 0)" -> "('Humidity', 14)"	 [user_data=true];
+	"('Temp', 1)" -> "('Outlook', 2)"	 [user_data=hot];
+	"('Temp', 1)" -> "('Outlook', 7)"	 [user_data=mild];
+	"('Temp', 1)" -> "('yes:1.0', 13)"	 [user_data=cool];
+	"('Outlook', 2)" -> "('no:0.5yes:0.5', 4)"	 [user_data=rainy];
+	"('Outlook', 2)" -> "('yes:1.0', 6)"	 [user_data=overcast];
+	"('Outlook', 7)" -> "('yes:1.0', 9)"	 [user_data=sunny];
+	"('Outlook', 7)" -> "('no:1.0', 11)"	 [user_data=rainy];
+	"('Humidity', 14)" -> "('no:1.0', 16)"	 [user_data=high];
+	"('Humidity', 14)" -> "('Outlook', 17)"	 [user_data=normal];
+	"('Outlook', 17)" -> "('no:1.0', 19)"	 [user_data=sunny];
+	"('Outlook', 17)" -> "('yes:1.0', 21)"	 [user_data=overcast];
 }
