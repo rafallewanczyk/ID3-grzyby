@@ -3,13 +3,14 @@ from .rouletteDecisionTree import RouletteDecisionTree
 from pandas import DataFrame
 from statistics import mean
 
-def cross_validation(data, names, k, r):
+def cross_validation(data, names, k, n):
     objects_number = len(data)
     lines_step = objects_number / k
     validation_start = 0
     validation_stop = lines_step
     error_ratios = []
     tree = None
+
     for i in range(0, k):
         train = []
         validation = []
@@ -27,9 +28,10 @@ def cross_validation(data, names, k, r):
         validation_start += lines_step
         validation_stop += lines_step
 
-        tree = DecisionTree(train_frame) if r else RouletteDecisionTree(train_frame)
+        tree = DecisionTree(train_frame) if n else RouletteDecisionTree(train_frame)
         tree.build_tree(train_frame)
         error = tree.validate(validation_frame)
         error_ratios.append(error)
+
     tree.draw()
-    return mean(error_ratios)
+    return error_ratios, mean(error_ratios)

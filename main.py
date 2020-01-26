@@ -12,20 +12,21 @@ from algorithms.cross_validation import cross_validation
 
 def main():
     parser = argparse.ArgumentParser(description="ID3 algorithm")
-    #parser.add_argument('-n', type=str, help="Column names file to import")
     parser.add_argument('-d', type=str, help="Data file to import")
-    parser.add_argument('-r', action='store_true')
+    parser.add_argument('-k', type=int, help='k-fold cross validation')
 
     args = parser.parse_args()
 
-    if args.d is None:
-        print('Missing input file name')
+    if args.d is None or args.k is None:
+        print('Missing input file name or k')
+        return
 
     data, names = read_data(args.d)
-    print(cross_validation(data, names, 10, True))
-    #tree.validate(validation_data)
-
-    #tree.draw()
+    normal_errors, normal_avg = cross_validation(data, names, k, True)
+    roulette_errors, roulette_avg = cross_validation(data, names, k, True)
+    print(f'Normal tree === errors ratio: {normal_errors}, avarage: {normal_avg}')
+    print(f'Roulette tree === errors ratio: {roulette_errors}, avarage: {roulette_avg}')
+    
 
 
 
