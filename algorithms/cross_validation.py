@@ -33,5 +33,5 @@ def cross_validation(data, names, k, n):
         error = tree.validate(validation_frame)
         error_ratios.append(error)
 
-    tree.draw()
+    #tree.draw()
     return error_ratios, mean(error_ratios)

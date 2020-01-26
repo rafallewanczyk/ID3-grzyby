@@ -8,7 +8,7 @@ from algorithms.rouletteDecisionTree import RouletteDecisionTree
 import argparse
 from data.reader import read_data, convert_to_frame
 from algorithms.cross_validation import cross_validation
-
+from random import shuffle
 
 def main():
     parser = argparse.ArgumentParser(description="ID3 algorithm")
@@ -22,8 +22,9 @@ def main():
         return
 
     data, names = read_data(args.d)
-    normal_errors, normal_avg = cross_validation(data, names, arg.k, True)
-    roulette_errors, roulette_avg = cross_validation(data, names, args.k, True)
+    shuffle(data)
+    normal_errors, normal_avg = cross_validation(data, names, args.k, True)
+    roulette_errors, roulette_avg = cross_validation(data, names, args.k, False)
     print(f'Normal tree === errors ratio: {normal_errors}, avarage: {normal_avg}')
     print(f'Roulette tree === errors ratio: {roulette_errors}, avarage: {roulette_avg}')
     
