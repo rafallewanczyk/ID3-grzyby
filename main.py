@@ -22,8 +22,8 @@ def main():
         return
 
     data, names = read_data(args.d)
-    normal_errors, normal_avg = cross_validation(data, names, k, True)
-    roulette_errors, roulette_avg = cross_validation(data, names, k, True)
+    normal_errors, normal_avg = cross_validation(data, names, arg.k, True)
+    roulette_errors, roulette_avg = cross_validation(data, names, args.k, True)
     print(f'Normal tree === errors ratio: {normal_errors}, avarage: {normal_avg}')
     print(f'Roulette tree === errors ratio: {roulette_errors}, avarage: {roulette_avg}')
     
