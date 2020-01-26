@@ -22,7 +22,7 @@ def main():
         print('Missing input file name')
 
     data, names = read_data(args.d)
-    print(cross_validation(data, names, 3, False))
+    print(cross_validation(data, names, 10, True))
     #tree.validate(validation_data)
 
     #tree.draw()

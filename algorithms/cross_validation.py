@@ -9,7 +9,7 @@ def cross_validation(data, names, k, r):
     validation_start = 0
     validation_stop = lines_step
     error_ratios = []
-    
+    tree = None
     for i in range(0, k):
         train = []
         validation = []
@@ -31,5 +31,5 @@ def cross_validation(data, names, k, r):
         tree.build_tree(train_frame)
         error = tree.validate(validation_frame)
         error_ratios.append(error)
-    
+    tree.draw()
     return mean(error_ratios)
