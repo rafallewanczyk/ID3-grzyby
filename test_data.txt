@@ -1,3 +1,0 @@
-overlook,temp,humidity,windy
-rainy,hot,high,false
-sunny,hot,low,true
