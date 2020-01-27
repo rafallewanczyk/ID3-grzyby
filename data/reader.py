@@ -3,7 +3,6 @@ from pandas import DataFrame
 
 def read_data(data_file):
     data = []
-    #validation_data = []
     names = []
     with open(data_file, 'r') as reader:
         names = reader.readline().strip().split(',')

@@ -18,7 +18,6 @@ class RouletteDecisionTree(DecisionTree):
         for parameter in gains_probabilities:
             temp_sum += parameter[1]
             if lottery < temp_sum:
-                print(f"wylosowany parametr {parameter[0]} \n")
                 return parameter[0]
         
                    

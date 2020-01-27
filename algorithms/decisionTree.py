@@ -14,19 +14,8 @@ class DecisionTree():
         self.counter = 0
         self.labels = {}
 
-    def build_tree(self, data_interval, parent=None, attribute_state=None):
-        # print(f"{parent}, {attribute_state}")
-        # print(data_interval)
-        # print(self.total_entropy(data_interval))
-        classes = data_interval['class'].unique().tolist()
-        # if len(classes) == 1:
-        #
-        #     print(f"lisc polaczenie {parent} -- {attribute_state} --> {classes[0]}")
-        #     self.graph.add_node((classes[0], self.counter))
-        #     if parent: self.graph.add_edge(parent, (classes[0], self.counter), user_data=attribute_state)
-        #     self.counter += 1
-        #     return
-
+    def build_tree(self, data_interval, parent=None, attribute_state=None):        
+        classes = data_interval['class'].unique().tolist()     
         attribute = (self.best_attribute(data_interval, self.total_entropy(data_interval)), self.counter)
         self.counter += 1
 
@@ -38,7 +27,6 @@ class DecisionTree():
                     if x == state:
                         counter += 1
                 s += (f"{state}:{counter / len(data_interval['class'])}")
-            # print(f"lisc polaczenien rozne {parent} -- {attribute_state} --> {s}")
             self.graph.add_node((s, self.counter))
             self.labels[(s, self.counter)] = s
             if parent: self.graph.add_edge(parent, (s, self.counter), user_data=attribute_state)
@@ -49,7 +37,6 @@ class DecisionTree():
         self.labels[attribute] = attribute[0]
         if parent:
             self.graph.add_edge(parent, attribute, user_data=attribute_state)
-            # print(f"polaczenie {parent} -- {attribute_state} --> {attribute}")
         else:
             self.root = attribute
 
@@ -75,19 +62,16 @@ class DecisionTree():
                 df = data_interval.loc[data_interval[c] == state]
                 information += df.shape[0] / data_interval.shape[0] * self.total_entropy(df)
                 gains[c] = entropy - information
-            # print(f"parameter : {c} information : {information} gain: {entropy - information}")
 
         return gains
 
     def best_attribute(self, data_interval, entropy):
-        # print(f'entropia: {entropy}')
         best_parameter, best_gain = '', 0
         information_gains = self.information_gains(data_interval, entropy)
         for parameter in information_gains.keys():
             if information_gains[parameter] > best_gain:
                 best_gain = information_gains[parameter]
                 best_parameter = parameter
-        # print(f"najlepszy parametr {best_parameter} \n")
         return best_parameter
 
     def predict(self, data_interval, attribute=None):
@@ -115,17 +99,13 @@ class DecisionTree():
     def validate(self, validation_data):
         record_list = validation_data.values.tolist()
         columns = validation_data.columns.tolist()
-        print("walidacja")
         error_ratio = 0
         for row in record_list:
             answer = self.predict(DataFrame([row[1::]], columns = columns[1::]))
             try:
                 error_ratio += answer.split(":")[0] != row[0]
-                # if answer.split(":")[0] != row[0] :
-                    # print(row)
             except AttributeError:
                 error_ratio += 1
-        # print(f"error ratio: {error_ratio/len(record_list)}")
         return error_ratio / len(record_list)
 
     
